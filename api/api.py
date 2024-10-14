@@ -34,9 +34,6 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
         # Dictionary to map actions to their respective serializers
         group_serializer = {
             'list': BasePageSerializer,
-            # 'retrieve': InformationDetailSerializer,
-            # 'retrieve_link': LearningHubLinkDetailSerializer,
-            # 'retrieve_category':PageSerializer
         }
         
         # Get the appropriate serializer based on the action
