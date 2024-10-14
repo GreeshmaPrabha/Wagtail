@@ -1,0 +1,26 @@
+<div id="previewModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <div id="modal-body">
+            <!-- Preview content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(instanceId) {
+    // Fetch the content for the instance
+    fetch(`/admin/preview/${instanceId}/`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('modal-body').innerHTML = data;
+            document.getElementById('previewModal').style.display = 'block';
+        })
+        .catch(error => console.error('Error fetching preview:', error));
+}
+
+function closeModal() {
+    document.getElementById('previewModal').style.display = 'none';
+}
+
+</script>
