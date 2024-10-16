@@ -7,8 +7,8 @@ from wagtail.documents.blocks import DocumentChooserBlock
 
 
 class BaseContentBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True, max_length=250)
-    content = blocks.RichTextBlock(required=True)  
+    heading = blocks.CharBlock(required=False, max_length=250)
+    content = blocks.RichTextBlock(required=False)  
     image = ImageChooserBlock(required=False)
 
 
@@ -72,10 +72,10 @@ class CareerBlock(blocks.StructBlock):
     A block used to represent a career section, including a heading, location, posted time, image, and a two links.
     It allows users to add an image along with text and optional links that can be either internal or external.
     """
-    heading = blocks.CharBlock(required=True, help_text=_("Add your heading"))  # Section heading
-    location = blocks.CharBlock(required=True, help_text=_("Add your location"))  # Section heading
-    time = blocks.CharBlock(required=True, help_text=_("Posted time"))  # Section heading
-    image = ImageChooserBlock(required=True)  # An image for the trade section, required
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))  # Section heading
+    location = blocks.CharBlock(required=False, help_text=_("Add your location"))  # Section heading
+    time = blocks.CharBlock(required=False, help_text=_("Posted time"))  # Section heading
+    image = ImageChooserBlock(required=False)  # An image for the trade section, required
     # links = blocks.ListBlock(
     #     LinkBlock(),
     #     min_num=0,  # Minimum number of links is zero (optional)
@@ -94,7 +94,7 @@ class EventAwardsBlock(blocks.StructBlock):
     A block used to represent a events and award section, including a image, and a descriptions.
     It allows users to add an image along with text and optional links that can be either internal or external.
     """
-    image = ImageChooserBlock(required=True)  # An image for the trade section, required
+    image = ImageChooserBlock(required=False)  # An image for the trade section, required
     description  = blocks.RichTextBlock(editor='default', required=False, help_text=_("Add additional text"))
     # links = blocks.ListBlock(
     #     LinkBlock(),
@@ -115,7 +115,7 @@ class MarketTrendsBlock(blocks.StructBlock):
     A block used to represent a events and award section, including a image, and a descriptions.
     It allows users to add an image along with text and optional links that can be either internal or external.
     """
-    image = ImageChooserBlock(required=True)  # An image for the trade section, required
+    image = ImageChooserBlock(required=False)  # An image for the trade section, required
     description  = blocks.RichTextBlock(editor='default', required=False, help_text=_("Add additional text"))
     # links = blocks.ListBlock(
     #     LinkBlock(),
@@ -130,7 +130,7 @@ class MarketTrendsBlock(blocks.StructBlock):
         label = _("MarketTrends Block")
         
 class VideoCardBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=True, help_text=_("Add your heading"))
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
     video_source = blocks.ChoiceBlock(
         choices=[
             ('upload', 'Upload Video'),
@@ -154,7 +154,7 @@ class VideoCardBlock(blocks.StructBlock):
     watch_time = blocks.IntegerBlock(
         label="Watch Time (minutes)",
         help_text="Estimated time to watch/read the content.",
-        required=True
+        required=False
     )
 
     proficiency_level = blocks.ChoiceBlock(
@@ -213,7 +213,7 @@ class PodcastBlogBlock(blocks.StructBlock):
     """
     video = blocks.ListBlock(VideoCardBlock(), label="Add text card", help_text="Add multiple video cards to this section")
     description  = blocks.RichTextBlock(editor='default', required=False, help_text=_("Add additional text"))
-    posted_date = blocks.CharBlock(required=True, help_text=_("Posted date"))
+    posted_date = blocks.CharBlock(required=False, help_text=_("Posted date"))
     # links = blocks.ListBlock(
     #     LinkBlock(),
     #     min_num=0,  
@@ -233,8 +233,8 @@ class ReportsBlock(blocks.StructBlock):
     A block used to represent a report section, including a image, date and a descriptions.
     It allows users to add an image along with text and optional links that can be either internal or external.
     """
-    image = ImageChooserBlock(required=True)
-    posted_date = blocks.CharBlock(required=True, help_text=_("Posted date"))
+    image = ImageChooserBlock(required=False)
+    posted_date = blocks.CharBlock(required=False, help_text=_("Posted date"))
     description  = blocks.RichTextBlock(editor='default', required=False, help_text=_("Add additional text"))
     # links = blocks.ListBlock(
     #     LinkBlock(),
