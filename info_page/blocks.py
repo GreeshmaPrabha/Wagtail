@@ -50,7 +50,7 @@ class AboutUsBlock(BaseTextBlock):
         label = "About us Block"
         
 class TeamListBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=True)
+    image = ImageChooserBlock(required=False)
     name = blocks.CharBlock(required=True, help_text=_("Add your name"))
     designation = blocks.CharBlock(required=True, help_text=_("Add your designation"))
     
@@ -68,7 +68,7 @@ class TeamDescriptionBlock(TeamListBlock):
         
 
 class AgentListBlock(TeamListBlock):
-    whatsapp_no = blocks.CharBlock(required=True, help_text=_("Add your whatsapp number"))
+    whatsapp_no = blocks.CharBlock(required=False, help_text=_("Add your whatsapp number"))
     mobile_no = blocks.CharBlock(required=True, help_text=_("Add your contact number"))
     email = blocks.EmailBlock(required=False, help_text=_("Add your email"))
     
@@ -78,7 +78,7 @@ class AgentListBlock(TeamListBlock):
     
     
 class ValueListBlock(BaseTextBlock):
-    icon = ImageChooserBlock(required=True)
+    icon = ImageChooserBlock(required=False)
     
     class Meta:
         icon = "doc-full"
@@ -93,10 +93,10 @@ class AgentDescriptionBlock(blocks.StructBlock):
         label = "Team Block with description"
         
 class ContactBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=True)
+    image = ImageChooserBlock(required=False)
     heading = blocks.CharBlock(required=True, help_text=_("Add your heading"))
     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
-    whatsapp_no = blocks.CharBlock(required=True, help_text=_("Add your whatsapp number"))
+    whatsapp_no = blocks.CharBlock(required=False, help_text=_("Add your whatsapp number"))
     mobile_no = blocks.CharBlock(required=True, help_text=_("Add your contact number"))
     
     class meta:
@@ -132,7 +132,7 @@ class PodcastBlock(blocks.StructBlock):
     watch_time = blocks.IntegerBlock(
         label="Watch Time (minutes)",
         help_text="Estimated time to watch/read the content.",
-        required=True
+        required=False
     )        
     thumbnail = ImageChooserBlock(
         label="Thumbnail Image",
