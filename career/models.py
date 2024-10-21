@@ -56,54 +56,49 @@ class ViewCountMixin(models.Model):
 
 # The main CareerPage model that contains all content for individual award posts
 class CareerPage(ViewCountMixin, BasePage, BannerMixin):
-    # Date, author (using StreamField), and reading time fields
-    intro_heading = StreamField([
-        ('intro_block', AboutUsBlock())
-    ], use_json_field=True, max_num=1, min_num=1)
-    heading = models.CharField(_("Heading"),null=True, blank=True, max_length=250)
-    sub_heading = models.CharField(_("Sub Heading"),null=True, blank=True, max_length=250)
-    careers = StreamField([
-        ('career_block', CareerBlock())
-    ], use_json_field=True, null=True,blank=True,min_num=0) #max_num=1
-
-    # Introductory text and banner image for the award page
-    # intro = RichTextField(blank=True)
-    # banner_image = models.ForeignKey(
-    #     "wagtailimages.Image",
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.SET_NULL,
-    #     related_name="+",
-    #     help_text=_("Banner image"),
-    # )
-
-    # Tagging system for the page
+    
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text=_("Career image"),
+    )
+    heading = models.CharField(_("Career heading"), null=True, blank=True, max_length=100)
+    posted_date = models.DateField(_("Posted date"), null=True, blank=True)
+    expiry_date = models.DateField(_("Expiry date"), null=True, blank=True)
+    description = RichTextField(_("Description"), blank=True) 
+    location = models.CharField(_("location"), null=True, blank=True, max_length=100)
     tags = ClusterTaggableManager(through=CareerPageTag, blank=True)
 
     # StreamField for the main content of the page, restricted to 1 content_block and 1 trade_block
-    content = StreamField([
-        ('career_content_block', CareerContentBlock(group="Base Blocks")),
-    ], use_json_field=True,  null=True,blank=True,min_num=0, block_counts={
-        'career_content_block': {'min_num': 0},
-    })
+    # content = StreamField([
+    #     ('career_block', ImageCardBlock(group="Base Blocks")),
+    #     ('career_opening_block', BaseContentBlock(group="Base Blocks")),
+        
+    # ], use_json_field=True,  null=True,blank=True,min_num=0, block_counts={
+    #     'career_block': {'min_num': 0},
+    #     'career_opening_block': {'min_num': 0},
+    # })
 
     # Fields indexed for search functionality
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('careers'),
-        index.SearchField('content'),
-    ]
-
-    # Admin interface panels, allowing users to edit the award page details
+        index.SearchField('heading'),
+        index.SearchField('posted_date'),
+        index.SearchField('description'),
+    ]    
     content_panels = BasePage.content_panels + BannerMixin.banner_panels + [
         MultiFieldPanel([
-            FieldPanel('intro_heading'),
+            FieldPanel('image'),
             FieldPanel('heading'),
-            FieldPanel('sub_heading'),
-            FieldPanel("careers"),
+            FieldPanel('posted_date'),
+            FieldPanel("expiry_date"),
+            FieldPanel('description'),
+            FieldPanel('location'),
             FieldPanel('tags'),
         ], heading="Career information"),
-        FieldPanel('content'),
+        # FieldPanel('content'),
     ]
 
     # No child pages allowed for AwardPage

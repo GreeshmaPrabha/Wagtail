@@ -56,45 +56,29 @@ class ViewCountMixin(models.Model):
 
 # The main AwardsPage model that contains all content for individual award posts
 class AwardsPage(ViewCountMixin, BasePage, BannerMixin):
-    # Date, author (using StreamField), and reading time fields
-    heading = models.CharField(_("Heading"),null=True, blank=True, max_length=250)
-    awards = StreamField([
-        ('awards_block', EventAwardsBlock())
-    ], use_json_field=True,  null=True,blank=True,min_num=0) #max_num=1
-    # AccoladesBlock
-    accolades_heading = models.CharField(_("Accolades Heading"),null=True, blank=True, max_length=250)
-    
-    accolades = StreamField([
-        ('accolades_block', EventAwardsBlock())
-    ], use_json_field=True,  null=True,blank=True,min_num=0)
-
-    # Introductory text and banner image for the award page
-    # intro = RichTextField(blank=True)
-    # banner_image = models.ForeignKey(
-    #     "wagtailimages.Image",
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.SET_NULL,
-    #     related_name="+",
-    #     help_text=_("Banner image"),
-    # )
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text=_("Award image"),
+    )
+    description = models.CharField(_("Award description"), null=True, blank=True, max_length=100)   
 
     # Tagging system for the page
     tags = ClusterTaggableManager(through=AwardsPageTag, blank=True)
 
     # Fields indexed for search functionality
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('awards'),
+        index.SearchField('description'),
     ]
 
     # Admin interface panels, allowing users to edit the award page details
     content_panels = BasePage.content_panels + BannerMixin.banner_panels + [
         MultiFieldPanel([
-            FieldPanel('heading'),
-            FieldPanel("awards"),
-            FieldPanel("accolades_heading"),
-            FieldPanel("accolades"),
+            FieldPanel('image'),
+            FieldPanel("description"),
             FieldPanel('tags'),
         ], heading="Awards information"),
     ]

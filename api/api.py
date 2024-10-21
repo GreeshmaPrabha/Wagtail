@@ -36,7 +36,6 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
             'list': BasePageSerializer,
         }
         
-        # Get the appropriate serializer based on the action
         serializer_class = group_serializer.get(self.action, None)
         
         if serializer_class is None:
@@ -54,9 +53,9 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
             locale = get_object_or_404(Locale, language_code=lang)
 
             # Get the initial queryset
-            parent_page = InformationIndexPage.objects.first()  # Adjust thi
+            parent_page = InformationIndexPage.objects.first()
             if parent_page:
-                # Return live child pages of the parent EducationPage
+                # Return live child pages of the parent page
                 querysets =  Page.objects.child_of(parent_page).specific().select_related('content_type').annotate(model_name=F('content_type__model'))     
             
                 # Serialize the paginated records
@@ -78,8 +77,7 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         response = {}
         try:
-            # import pdb; pdb.set_trace()
-             # Extract slug from URL parameters
+            # get slug from URL parameters
             slug = kwargs.get('slug')
             
             # Get language from the request and fetch corresponding Locale object
@@ -102,7 +100,6 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
                 return Response({"error": "Page type not supported."}, status=status.HTTP_400_BAD_REQUEST)            
             
             if serializer and serializer.data is not None:                
-                # Prepare the response data
                 response['result'] = 'success'
                 response['records'] = serializer.data
             else:

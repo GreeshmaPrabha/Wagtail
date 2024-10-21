@@ -42,7 +42,72 @@ class SEOFieldsSerializer(serializers.Serializer):
     og_image = ImageRenditionField('fill-800x450')  # Example rendition
 
 
-class PartnerPageBlockSerializer(serializers.Serializer):
+# -----------------------------------------------------------------------
+class OverlayedImageBlockSerializer(serializers.Serializer):
+    heading = serializers.CharField(read_only=True)
+    sub_heading = serializers.CharField(read_only=True)
+    description = serializers.SerializerMethodField(read_only=True)
+    main_image = serializers.SerializerMethodField(read_only=True)
+    secondary_image = serializers.SerializerMethodField(read_only=True)
+    background = serializers.CharField(read_only=True)
+    top_padding = serializers.CharField(read_only=True)
+    bottom_padding = serializers.CharField(read_only=True)
+    alignment = serializers.CharField(read_only=True)
+    component_type = serializers.CharField(read_only=True)
+    
+    def get_description(self, instance):
+        content = instance.get('description')
+        if not content:
+            return None
+
+        # Ensure content is a string
+        if isinstance(content, RichText):
+            content = str(content)
+
+        request = self.context.get('request')
+        if not request:
+            return content  # or raise an exception if request is required
+
+        soup = BeautifulSoup(content, 'html.parser')
+        for img_tag in soup.find_all('img'):
+            src = img_tag.get('src')
+            if src:
+                img_tag['src'] = request.build_absolute_uri(src)
+
+        return str(soup)
+    
+    def get_main_image(self, obj):
+        if obj.get('main_image'):
+            image = obj['main_image']
+            
+            rendition = get_image_rendition(image, 'original')
+            if rendition:
+                return {
+                    "url": rendition['url'],
+                    "full_url": rendition['full_url'],
+                    "width": rendition['width'],
+                    "height": rendition['height'],
+                    "alt": rendition['alt']
+                }
+        return None
+    
+    def get_secondary_image(self, obj):
+        if obj.get('secondary_image'):
+            image = obj['secondary_image']
+            
+            rendition = get_image_rendition(image, 'original')
+            if rendition:
+                return {
+                    "url": rendition['url'],
+                    "full_url": rendition['full_url'],
+                    "width": rendition['width'],
+                    "height": rendition['height'],
+                    "alt": rendition['alt']
+                }
+        return None
+ 
+ 
+class BaseContentBlockSerializer(serializers.Serializer):
     heading = serializers.CharField(read_only=True)
     sub_heading = serializers.CharField(read_only=True)
     description = serializers.SerializerMethodField(read_only=True)
@@ -68,6 +133,82 @@ class PartnerPageBlockSerializer(serializers.Serializer):
 
         return str(soup)
     
+
+class ImageCardSerializer(serializers.Serializer):
+    heading = serializers.CharField(read_only=True)
+    description = serializers.SerializerMethodField(read_only=True)
+    image = serializers.SerializerMethodField(read_only=True)
+    
+    def get_description(self, instance):
+        content = instance.get('description')
+        if not content:
+            return None
+
+        # Ensure content is a string
+        if isinstance(content, RichText):
+            content = str(content)
+
+        request = self.context.get('request')
+        if not request:
+            return content  # or raise an exception if request is required
+
+        soup = BeautifulSoup(content, 'html.parser')
+        for img_tag in soup.find_all('img'):
+            src = img_tag.get('src')
+            if src:
+                img_tag['src'] = request.build_absolute_uri(src)
+
+        return str(soup)
+    
+    def get_image(self, obj):
+        if obj.get('image'):
+            image = obj['image']
+            
+            rendition = get_image_rendition(image, 'original')
+            if rendition:
+                return {
+                    "url": rendition['url'],
+                    "full_url": rendition['full_url'],
+                    "width": rendition['width'],
+                    "height": rendition['height'],
+                    "alt": rendition['alt']
+                }
+        return None
+
+class NormalImageBlockSerializer(serializers.Serializer):
+    heading = serializers.CharField(read_only=True)
+    sub_heading = serializers.CharField(read_only=True)
+    description = serializers.SerializerMethodField(read_only=True)
+    points = ImageCardSerializer(many=True)
+    background = serializers.CharField(read_only=True)
+    top_padding = serializers.CharField(read_only=True)
+    bottom_padding = serializers.CharField(read_only=True)
+    component_type = serializers.CharField(read_only=True)
+    card_count = serializers.CharField(read_only=True)
+    
+    def get_description(self, instance):
+        content = instance.get('description')
+        if not content:
+            return None
+
+        # Ensure content is a string
+        if isinstance(content, RichText):
+            content = str(content)
+
+        request = self.context.get('request')
+        if not request:
+            return content  # or raise an exception if request is required
+
+        soup = BeautifulSoup(content, 'html.parser')
+        for img_tag in soup.find_all('img'):
+            src = img_tag.get('src')
+            if src:
+                img_tag['src'] = request.build_absolute_uri(src)
+
+        return str(soup)
+    
+
+# ------------------------------------------------------------   
 class BaseTextBlockSerializer(serializers.Serializer):
     heading = serializers.CharField(read_only=True)
     description = serializers.SerializerMethodField(read_only=True)
@@ -507,7 +648,7 @@ class MarketTrendsBlockSerializer(serializers.Serializer):
 
         request = self.context.get('request')
         if not request:
-            return content  # or raise an exception if request is required
+            return content 
 
         soup = BeautifulSoup(content, 'html.parser')
         for img_tag in soup.find_all('img'):
@@ -594,7 +735,7 @@ class ReportBlockSerializer(serializers.Serializer):
 
         request = self.context.get('request')
         if not request:
-            return content  # or raise an exception if request is required
+            return content 
 
         soup = BeautifulSoup(content, 'html.parser')
         for img_tag in soup.find_all('img'):
@@ -636,7 +777,7 @@ class NewsContentBlockSerializer(serializers.Serializer):
 
         request = self.context.get('request')
         if not request:
-            return content  # or raise an exception if request is required
+            return content 
 
         soup = BeautifulSoup(content, 'html.parser')
         for img_tag in soup.find_all('img'):
@@ -661,16 +802,15 @@ class PageContentMixin:
         content_blocks = []
         request = self.context.get('request')
         for block in obj.content:
-            # print("------block.block_type------",block.block_type)
-            if block.block_type == 'partner_page_list_block':
+            if block.block_type == 'overlayed_image_block':
                 content_blocks.append({
-                    'type': 'partner_page_list_block',
-                    'value': PartnerPageBlockSerializer(block.value, context={'parent': self}).data
+                    'type': 'overlayed_image_block',
+                    'value': OverlayedImageBlockSerializer(block.value, context={'parent': self}).data
                 })
-            elif block.block_type == 'base_text_block':
+            elif block.block_type == 'base_content_block':
                 content_blocks.append({
-                    'type': 'base_text_block',
-                    'value': BaseTextBlockSerializer(block.value, context={'parent': self}).data
+                    'type': 'base_content_block',
+                    'value': BaseContentBlockSerializer(block.value, context={'parent': self}).data
                 })
             elif block.block_type == 'about_us_block':
                 content_blocks.append({

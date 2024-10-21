@@ -56,39 +56,45 @@ class ViewCountMixin(models.Model):
 
 # The main NewsPage model that contains all content for individual award posts
 class NewsPage(ViewCountMixin, BasePage, BannerMixin):
-    # Date, author (using StreamField), and reading time fields
     heading = models.CharField(_("Heading"),null=True, blank=True, max_length=250)
-    sub_heading = models.CharField(_("Sub Heading"),null=True, blank=True, max_length=250)
-    news = StreamField([
-        ('news_block', NewsBlock())
-    ], use_json_field=True,null=True,blank=True, min_num=0) #max_num=1
+    description = RichTextField(_("Description"), blank=True) 
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text=_("Career image"),
+    )
+    date = models.DateField(_("Date"), null=True, blank=True)
+    reading_time = models.CharField(_("Read Time"), null=True, blank=True, max_length=50) 
     # Tagging system for the page
     tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
     
     content = StreamField([
-        ('news_content_block', MoreContentBlock(group="Base Blocks")),
-        ('news_related_news_block', RelatedNewsBlock(group="Base Blocks")),
+        ('social_share_block', SocialSharingBlock(group="Base Blocks")),
     ], use_json_field=True,null=True,blank=True, min_num=0, block_counts={
         'news_content_block': {'min_num': 0, 'max_num': 1},
-        'news_related_news_block': {'min_num': 0},
     })
 
     # Fields indexed for search functionality
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('news'),
+        index.SearchField('heading'),
+        index.SearchField('description'),
         index.SearchField('content'),
     ]
 
     # Admin interface panels, allowing users to edit the award page details
     content_panels = BasePage.content_panels + BannerMixin.banner_panels + [
         MultiFieldPanel([
+            FieldPanel('image'),
             FieldPanel('heading'),
-            FieldPanel('sub_heading'),
-            FieldPanel("news"),
-            FieldPanel('tags'),
-        ], heading="News information"),
+            FieldPanel("date"),
+            FieldPanel('description'),
+            FieldPanel('reading_time'),
+            FieldPanel('tags'), 
             FieldPanel("content"),
+        ], heading="News information"),
     ]
 
     # No child pages allowed for AwardPage

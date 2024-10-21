@@ -32,29 +32,31 @@ class MultiplePage(BasePage):
         
 class ContentPage(BasePage, BannerMixin):  
     content = StreamField([
-        ('partner_page_list_block', PartnerPageListBlock(group="Base Blocks")),
-        ('base_text_block', BaseTextBlock(group="Base Blocks")),
-        ('about_us_block', AboutUsBlock(group="Base Blocks")),
-        ('team_list_block', TeamListBlock(group="Card Blocks")),
-        ('team_description_block', TeamDescriptionBlock(group="Card Blocks")),
-        ('agent_list_block', AgentListBlock(group="Card Blocks")),
-        ('value_list_block', ValueListBlock(group="Card Blocks")),
-        ('agent_description_block', AgentDescriptionBlock(group="Card Blocks")),
-        ('contact_block', ContactBlock(group="Base Blocks")),
-        ('podcast_block', PodcastBlock(group="Base Blocks")),      
-        ('base_heading_block', BaseHeadingBlock(group="Base Blocks")),   
-
-        #blog blocks
-        ('link_block', LinkBlock(group="Card Blocks")),
-        ('career_block', CareerBlock(group="Card Blocks")),
-        ('event_awards_block', EventAwardsBlock(group="Card Blocks")),
-        ('base_content_block', BaseContentBlock(group="Card Blocks")),
-        ('market_trend_block',MarketTrendsBlock(group="Card Blocks")),
-        ('video_block',VideoCardBlock(group="Card Blocks")),
-        ('podcast_block', PodcastBlock(group="Card Blocks")),
-        ('report_block',ReportsBlock(group="Card Blocks")),
-        ('news_block',NewsBlock(group="Card Blocks")),
-        ('media_block', MediaBlock(group="Card Blocks")),
+        # base
+        ('base_content_block', BaseContentBlock(group="Base Blocks")),
+        ('overlayed_image_block', OverlayedImageBlock(group="Base Blocks")),
+        ('normal_image_block', NormalImageBlock(group="Base Blocks")),
+        ('management_msg_block', ManagementMessageBlock(group="Base Blocks")),
+        ('top_management_block', TopManagementListBlock(group="Base Blocks")),
+        ('management_list_block', ManagementListBlock(group="Base Blocks")),
+        ('base_image_block', BaseImageBlock(group="Base Blocks")),
+        ('normal_text', NormalTextBlock(group="Base Blocks")),        
+        ('feature_list_block', FeaturesListBlock(group="Base Blocks")),        
+        ('point_text_block', PointTextBlock(group="Base Blocks")),        
+        ('why_us_block', WhyUsBlock(group="Base Blocks")), 
+        ('overview_block', OverviewBlock(group="Base Blocks")), 
+        ('contact_info_block', ContactInfoBlock(group="Base Blocks")),        
+        ('social_share_block', SocialSharingBlock(group="Base Blocks")),
+        ('link_block', LinkBlock(group="Base Blocks")),        
+        ('faq_block', FAQBlock(group="Base Blocks")),
+        
+        # card
+        ('review_card_block', ReviewCardBlock(group="Card Blocks")),
+        ('image_card_block', ImageCardBlock(group="Card Blocks")),
+        ('text_card_block', TextCardBlock(group="Card Blocks")),        
+        ('profile_card_block', ProfileCardBlock(group="Card Blocks")),
+        ('info_card_block', InfoCardBlock(group="Card Blocks")),
+        
         
     ], use_json_field=True)
     
@@ -82,29 +84,31 @@ class BlogLinkPage(BasePage, BannerMixin):
     )
     
     content = StreamField([
-        ('partner_page_list_block', PartnerPageListBlock(group="Base Blocks")),
-        ('base_text_block', BaseTextBlock(group="Base Blocks")),
-        ('about_us_block', AboutUsBlock(group="Base Blocks")),
-        ('team_list_block', TeamListBlock(group="Swiper Blocks")),
-        ('team_description_block', TeamDescriptionBlock(group="Card Blocks")),
-        ('agent_list_block', AgentListBlock(group="Card Blocks")),
-        ('value_list_block', ValueListBlock(group="Card Blocks")),
-        ('agent_description_block', AgentDescriptionBlock(group="Card Blocks")),
-        ('contact_block', ContactBlock(group="Base Blocks")),
-        ('podcast_block', PodcastBlock(group="Base Blocks")),        
-        ('base_heading_block', BaseHeadingBlock(group="Base Blocks")),        
-
-        #blog blocks
-        ('link_block', LinkBlock(group="Card Blocks")),
-        ('career_block', CareerBlock(group="Card Blocks")),
-        ('event_awards_block', EventAwardsBlock(group="Card Blocks")),
-        ('text_block', BaseTextBlock(group="Card Block")),
-        ('market_trend_block',MarketTrendsBlock(group="Card Block")),
-        ('video_block',VideoCardBlock(group="Card Block")),
-        ('podcast_block', PodcastBlock(group="Card Blocks")),
-        ('report_block',ReportsBlock(group="Card Block")),
-        ('news_block',NewsBlock(group="Card Block")),
-        ('media_block', MediaBlock(group="Card Blocks")),
+        # base
+        ('base_content_block', BaseContentBlock(group="Base Blocks")),
+        ('overlayed_image_block', OverlayedImageBlock(group="Base Blocks")),
+        ('normal_image_block', NormalImageBlock(group="Base Blocks")),
+        ('management_msg_block', ManagementMessageBlock(group="Base Blocks")),
+        ('top_management_block', TopManagementListBlock(group="Base Blocks")),
+        ('management_list_block', ManagementListBlock(group="Base Blocks")),
+        ('base_image_block', BaseImageBlock(group="Base Blocks")),
+        ('normal_text', NormalTextBlock(group="Base Blocks")),        
+        ('feature_list_block', FeaturesListBlock(group="Base Blocks")),        
+        ('point_text_block', PointTextBlock(group="Base Blocks")),        
+        ('why_us_block', WhyUsBlock(group="Base Blocks")), 
+        ('overview_block', OverviewBlock(group="Base Blocks")), 
+        ('contact_info_block', ContactInfoBlock(group="Base Blocks")),        
+        ('social_share_block', SocialSharingBlock(group="Base Blocks")),
+        ('link_block', LinkBlock(group="Base Blocks")),        
+        ('faq_block', FAQBlock(group="Base Blocks")),
+        
+        # card
+        ('review_card_block', ReviewCardBlock(group="Card Blocks")),
+        ('image_card_block', ImageCardBlock(group="Card Blocks")),
+        ('text_card_block', TextCardBlock(group="Card Blocks")),        
+        ('profile_card_block', ProfileCardBlock(group="Card Blocks")),
+        ('info_card_block', InfoCardBlock(group="Card Blocks")),
+        
         
     ], use_json_field=True)
     

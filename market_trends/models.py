@@ -57,11 +57,15 @@ class ViewCountMixin(models.Model):
 # The main MarketTrendsPage model that contains all content for individual award posts
 class MarketTrendsPage(ViewCountMixin, BasePage, BannerMixin):
     # Date, author (using StreamField), and reading time fields
-    heading = models.CharField(_("Heading"),null=True, blank=True, max_length=250)
-    market_trends = StreamField([
-        ('awards_block', MarketTrendsBlock())
-    ], use_json_field=True, null=True,blank=True,min_num=0) #max_num=1
-
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text=_("Award image"),
+    )
+    date = models.CharField(_("Date"), null=True, blank=True, max_length=100)
     # Tagging system for the page
     tags = ClusterTaggableManager(through=MarketTrendsPageTag, blank=True)
 
@@ -74,8 +78,8 @@ class MarketTrendsPage(ViewCountMixin, BasePage, BannerMixin):
     # Admin interface panels, allowing users to edit the award page details
     content_panels = BasePage.content_panels + BannerMixin.banner_panels + [
         MultiFieldPanel([
-            FieldPanel('heading'),
-            FieldPanel("market_trends"),
+            FieldPanel('image'),
+            FieldPanel("date"),
             FieldPanel('tags'),
         ], heading="MarketTrends information"),
     ]

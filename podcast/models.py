@@ -59,21 +59,27 @@ class PodcastPage(ViewCountMixin, BasePage, BannerMixin):
     # Date, author (using StreamField), and reading time fields
     heading = models.CharField(_("Heading"),null=True, blank=True, max_length=250)
     sub_heading = models.CharField(_("Sub Heading"),null=True, blank=True, max_length=250)
-    podcast_intro = StreamField([
-        ('podcast_into_block', PodcastBlock())
-    ], use_json_field=True, min_num=1,max_num=1) 
-    podcast = StreamField([
-        ('podcast_block', PodcastBlogBlock())
-    ], use_json_field=True,  null=True,blank=True,min_num=0) #max_num=1
+    description = RichTextField(_("Description"), blank=True) 
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text=_("Career image"),
+    )
     
+    video = StreamField([
+            ('video_list_block', VideoListBlock(group="Base Blocks")), 
+        ], use_json_field=True,null=True, blank=True,min_num=0)
+    is_featured = models.BooleanField(default=False, verbose_name="Is Featured")
     # Tagging system for the page
     tags = ClusterTaggableManager(through=PodcastPageTag, blank=True)
 
     # Fields indexed for search functionality
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('podcast_intro'),
-        index.SearchField('podcast'),
+        index.SearchField('heading'),
+        index.SearchField('description'),
     ]
 
     # Admin interface panels, allowing users to edit the award page details
@@ -81,8 +87,10 @@ class PodcastPage(ViewCountMixin, BasePage, BannerMixin):
         MultiFieldPanel([
             FieldPanel('heading'),
             FieldPanel('sub_heading'),
-            FieldPanel('podcast_intro'),
-            FieldPanel("podcast"),
+            FieldPanel('description'),
+            FieldPanel("image"),
+            FieldPanel("video"),
+            FieldPanel("is_featured"),
             FieldPanel('tags'),
         ], heading="Podcast information"),
     ]
