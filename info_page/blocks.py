@@ -651,6 +651,29 @@ class DeveloperListBlock(blocks.StructBlock):
         icon = "doc-full"
         label = _("Agent List Block")
               
+              
+class AmenitiesBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
+    links = blocks.ListBlock(
+        LinkBlock(),
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
+        help_text=_("Add button/link information to this section"),
+        label="Add link details"
+    )
+    
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=BLOG_TARGETS), label="Select amenities pages")
+    
+        
+    class meta:
+        icon = "doc-full"
+        label = _("Amenities List Block")
+    
+    
 class FullVideoBlock(blocks.StructBlock):
     video_source = blocks.ChoiceBlock(
         choices=[
@@ -806,8 +829,7 @@ class MultiContentImageBlock(blocks.StructBlock):
 #     class meta:
 #         icon = "doc-full"
 #         label = _("Service Block")
-
-   
+ 
     
 # class DeveloperBlock(blocks.StructBlock):
 #     heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
