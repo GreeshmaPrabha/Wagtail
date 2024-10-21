@@ -76,6 +76,7 @@ class NewsLetterPage(ViewCountMixin, BasePage, BannerMixin):
     ], use_json_field=True,null=True,blank=True, min_num=0, block_counts={
         'social_share_block': {'min_num': 0,'max_num': 1},
     })
+    
 
     # Fields indexed for search functionality
     search_fields = Page.search_fields + [

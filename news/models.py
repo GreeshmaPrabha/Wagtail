@@ -74,7 +74,7 @@ class NewsPage(ViewCountMixin, BasePage, BannerMixin):
     content = StreamField([
         ('social_share_block', SocialSharingBlock(group="Base Blocks")),
     ], use_json_field=True,null=True,blank=True, min_num=0, block_counts={
-        'news_content_block': {'min_num': 0, 'max_num': 1},
+        'social_share_block': {'min_num': 0, 'max_num': 1},
     })
 
     # Fields indexed for search functionality

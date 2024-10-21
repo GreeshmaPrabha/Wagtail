@@ -1,5 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
+UAE_TIMEZONE = 'Asia/Dubai'
 
 PROPERTY_TYPE = {
     'Apartment' : 'Apartment',
@@ -84,6 +85,21 @@ ALIGNMENT_CHOICES = [
 
 PAGE_TARGETS = [ ]
 
+BLOG_TARGETS = [
+        'news.NewsPage',        
+        'newsletter.NewsLetterPage',        
+        'reports.ReportPage',        
+        'blogs.BlogPage',        
+        'more_media.MediaPage',
+        'info_page.ContentPage',
+        'info_page.BlogLinkPage',
+        'info_page.MultiplePage',
+        'property_new.PropertyNewPage'
+        
+    ]
+DEVELOPER_TARGETS = [
+        'developer.DeveloperPage'
+    ]
 
 BG_CHOICES = [
         ('transparent', _('Transparent Background'),),
@@ -111,3 +127,12 @@ SOCIAL_MEDIA_CHOICES = [
     ('linkedin', 'LinkedIn'),
     ('youtube', 'YouTube'),
 ]
+
+
+FRONTEND_FOLDERS = [
+	    ('NewsPage', 'news',),
+        ('NewsLetterPage', 'newsletter',),
+        ('ReportPage', 'reports',),
+        ('otherpage', '',),
+
+    ]

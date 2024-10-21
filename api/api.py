@@ -93,9 +93,9 @@ class InformationPagesViewSet(viewsets.ModelViewSet):
                     
                 serializer = MultiplePageSerializer(sub_pages,many=True, context={'request': request})
             elif isinstance(page.specific, ContentPage):
-                serializer = ContentPageSerializer(page.specific)
+                serializer = ContentPageSerializer(page.specific, context={'request': request})
             elif isinstance(page.specific, BlogLinkPage):
-                serializer = BlogLinkPageSerializer(page.specific)
+                serializer = BlogLinkPageSerializer(page.specific, context={'request': request})
             else:
                 return Response({"error": "Page type not supported."}, status=status.HTTP_400_BAD_REQUEST)            
             

@@ -49,6 +49,13 @@ class ContentPage(BasePage, BannerMixin):
         ('social_share_block', SocialSharingBlock(group="Base Blocks")),
         ('link_block', LinkBlock(group="Base Blocks")),        
         ('faq_block', FAQBlock(group="Base Blocks")),
+        ('related_news', RelatedNewsBlock(group="Base Blocks")),
+        ('project_list', ProjectListBlock(group="Base Blocks")),        
+        ('property_list', PropertyListBlock(group="Base Blocks")),
+        ('agent_list', AgentListBlock(group="Base Blocks")),
+        ('developer_list', DeveloperListBlock(group="Base Blocks")),
+        ('overlayed_image_multi_data_list', MultiContentOverlayedBlock(group="Base Blocks")),
+        ('single_image_multi_data_list', MultiContentImageBlock(group="Base Blocks")),
         
         # card
         ('review_card_block', ReviewCardBlock(group="Card Blocks")),
@@ -101,6 +108,13 @@ class BlogLinkPage(BasePage, BannerMixin):
         ('social_share_block', SocialSharingBlock(group="Base Blocks")),
         ('link_block', LinkBlock(group="Base Blocks")),        
         ('faq_block', FAQBlock(group="Base Blocks")),
+        ('related_news', RelatedNewsBlock(group="Base Blocks")),
+        ('project_list', ProjectListBlock(group="Base Blocks")),
+        ('property_list', PropertyListBlock(group="Base Blocks")),
+        ('agent_list', AgentListBlock(group="Base Blocks")),
+        ('developer_list', DeveloperListBlock(group="Base Blocks")),
+        ('overlayed_image_multi_data_list', MultiContentOverlayedBlock(group="Base Blocks")),
+        ('single_image_multi_data_list', MultiContentImageBlock(group="Base Blocks")),
         
         # card
         ('review_card_block', ReviewCardBlock(group="Card Blocks")),

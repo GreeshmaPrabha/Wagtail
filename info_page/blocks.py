@@ -172,18 +172,33 @@ class OverlayedImageBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    alignment = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="center", help_text=_("Block Alignment"))
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    image_alignment = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="center", help_text=_("Block Alignment"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     
     class Meta:
         icon = "image"
         label = _("Overlayed Image Block")
     
+class ImageBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
+    image = ImageChooserBlock(required=False)
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
+    image_alignment = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="center", help_text=_("Block Alignment"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
 
+    class meta:
+        icon = "image"
+        label = _("Image Block")
+        
 class ImageCardBlock(blocks.StructBlock):
     heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
     image = ImageChooserBlock(required=True)
+    
     
     class Meta:
         icon = "image"
@@ -206,7 +221,7 @@ class NormalImageBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -221,13 +236,12 @@ class ManagementMessageBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     
     class Meta:
         icon = "doc-full"
         label = _("Management Message Block")
     
-
 class ProfileCardBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
     name = blocks.CharBlock(required=False, help_text=_("Add name"))
@@ -245,7 +259,7 @@ class TopManagementListBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -260,7 +274,7 @@ class ManagementListBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -342,7 +356,7 @@ class BaseImageBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     
     class Meta:
         icon = "media"
@@ -356,7 +370,7 @@ class NormalTextBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -370,7 +384,7 @@ class FeaturesListBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -393,7 +407,7 @@ class WhyUsBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     class Meta:
         icon = "doc-full"
         label = _("Why Us Block")
@@ -409,7 +423,7 @@ class OverviewBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     
     class Meta:
         icon = "doc-full"
@@ -438,7 +452,7 @@ class ContactInfoBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
     card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
     
     class Meta:
@@ -463,68 +477,6 @@ class SocialSharingBlock(blocks.StructBlock):
     class Meta:
         icon = "link-external"
         label = _("Social Sharing Block")
-
-
-class PodcastBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=False)
-    video_source = blocks.ChoiceBlock(
-        choices=[
-            ('upload', 'Upload Video'),
-            ('external', 'External Video Link'),
-        ],
-        label="Video Source",
-        help_text="Choose whether to upload a video or provide an external link."
-    )
-
-    uploaded_video = DocumentChooserBlock(
-        required=False,
-        label="Upload Video",
-        help_text="Upload a video file (MP4, MOV, AVI, or WebM)",
-    )
-    external_video_link = blocks.URLBlock(
-        required=False,
-        label="External Video Link",
-        help_text="Paste the URL of an external video (e.g., YouTube, Vimeo)",
-    )   
-
-    watch_time = blocks.IntegerBlock(
-        label="Watch Time (minutes)",
-        help_text="Estimated time to watch/read the content.",
-        required=False
-    )
-
-    proficiency_level = blocks.ChoiceBlock(
-        choices=PROFICIENCY_LEVEL_CHOICES,
-        label="Proficiency Level",
-        help_text="Select the difficulty level."
-    )
-
-    thumbnail = ImageChooserBlock(
-        label="Thumbnail Image",
-        help_text="Choose a thumbnail image for the video."
-    )
-
-    link_label = blocks.CharBlock(
-        label="Link Label",
-        max_length=50,
-        help_text="The text for the link button.",
-        required=False
-    )
-    heading = blocks.CharBlock(required=False, help_text=_("Add your heading")) 
-    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading")) 
-    description  = blocks.RichTextBlock(editor='default', required=False, help_text=_("Add additional text"))
-    date = blocks.CharBlock(required=False, help_text=_("Posted date"))
-    is_featured = blocks.BooleanBlock(required=False, help_text="Check this box to show as featured.")
-    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
-    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
-    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
-     
-
-    class Meta:
-        icon = "site"
-        label = _("Podcast Block")
-
 
 
 class VideoListBlock(blocks.StructBlock):
@@ -593,154 +545,112 @@ class VideoListBlock(blocks.StructBlock):
         return cleaned_data
 # ----------------------------------- ----------------------------------- ----------------------------------- -----------------------------------     
 
-
-class AgentListBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=False)
-    name = blocks.CharBlock(required=False, help_text=_("Add name")) 
-    designation = blocks.CharBlock(required=False, help_text=_("Add designation")) 
-    links = blocks.ListBlock(
-        LinkBlock(),
-        min_num=0,
-        max_num=3,
-        help_text=_("Add button/link information to this section"),
-        label="Add link details"
-    ) 
-    is_super_agent = blocks.BooleanBlock(required=False, help_text="Check this if the user is super agent.")
-    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
-    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
-    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
-    card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
-    
-    class Meta:
-        icon = "doc-full"
-        label = _("Agent list Block")
-        
-class MultiplePageChooserBlock(blocks.StructBlock):
-    page = blocks.PageChooserBlock(required=False)  
-    class meta:
-        icon = "doc-full"
-        label = _("Related News Page Block")  
-       
 class RelatedNewsBlock(blocks.StructBlock):
     heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
-    related_news = blocks.ListBlock(MultiplePageChooserBlock(), label="Add pages", help_text="Add related news to this section")
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
+    links = blocks.ListBlock(
+        LinkBlock(),
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
+        help_text=_("Add button/link information to this section"),
+        label="Add link details"
+    )
+    
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=BLOG_TARGETS), label="Select related news pages")
+    
         
     class meta:
         icon = "doc-full"
         label = _("Related News Block")
-   
-   
-class ImageBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=False) 
-    class meta:
-        icon = "doc-full"
-        label = _("Image Block")
         
-
-class PropertyValueListBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=False) 
+class ProjectListBlock(blocks.StructBlock):
     heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
-    description = blocks.CharBlock(required=False, help_text=_("Add your description"))
-
-    class Meta:
-        icon = "media"
-        label = _("Property Value Card")
-            
-class PropertyCardBlock(blocks.StructBlock):
-    images = blocks.ListBlock(ImageBlock(), label="Add images", help_text="Add multiple images to this section") 
-    video = blocks.ListBlock(VideoCardBlock(), label="Add videos", help_text="Add multiple videos to this section") 
-    amount = blocks.CharBlock(required=False, help_text=_("Add your heading"))
-    tags = blocks.CharBlock(required=False, help_text=_("Add sub heading"))
-    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
-    points = blocks.ListBlock(PropertyValueListBlock(),label="Add property value cards", help_text="Add value cards to this section")
-    location = blocks.CharBlock(required=False, help_text=_("Add location"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
     links = blocks.ListBlock(
         LinkBlock(),
-        min_num=0,
-        max_num=2,
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
         help_text=_("Add button/link information to this section"),
         label="Add link details"
-    ) 
+    )
+    
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=BLOG_TARGETS), label="Select project pages")
+    
+        
+    class meta:
+        icon = "doc-full"
+        label = _("Project List Block")
+        
+class AgentListBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
-    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
-    card_count = blocks.ChoiceBlock(max_length=20, choices=CARD_CHOICES,  null=True, blank=True, default="3", help_text=_("Number of cards"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
+    links = blocks.ListBlock(
+        LinkBlock(),
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
+        help_text=_("Add button/link information to this section"),
+        label="Add link details"
+    )
     
-    class Meta:
-        icon = "doc-full"
-        label = _("Normal Image Block")
-
-class ProjectDetailBlock(blocks.StructBlock):
-    points = blocks.CharBlock(required=False, help_text=_("Add your value"))   
-    class meta:
-        icon = "doc-full"
-        label = _("Project detail Block")    
-
-# project listing block
-class ProjectBlock(blocks.StructBlock):
-    developer = blocks.CharBlock(required=False, help_text=_("Add developer"))
-    points = blocks.ListBlock(ProjectDetailBlock(), label="Add points", help_text="Add multiple points to this section")
-    heading = blocks.CharBlock(required=False, help_text=_("Add project"))
-    sub_heading = blocks.CharBlock(required=False, help_text=_("Add detail"))
-    images = blocks.ListBlock(ImageBlock(), label="Add images", help_text="Add multiple images to this section")     
-    class meta:
-        icon = "doc-full"
-        label = _("Project Block")
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=BLOG_TARGETS), label="Select agent pages")
+    
         
-class AmenitiesListBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=False) 
-    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))
     class meta:
         icon = "doc-full"
-        label = _("Amenities List Block")
-    
-class AmentiesBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
-    points = blocks.ListBlock(AmenitiesListBlock(), label = "Add details", help_text="add multiple amenities here")
-    
-    class meta:
-        icon = "doc-full"
-        label = _("Amenities Block")
-    
-class MultiDetailBlock(blocks.StructBlock):
-    image = ImageChooserBlock(required=False) 
-    heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
-    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))    
-    class meta:
-        icon = "doc-full"
-        label = _("Multidata Block")
+        label = _("Agent List Block")
         
-       
-class ServiceBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
-    sub_heading = blocks.CharBlock(required=False, help_text=_("Add sub heading"))
-    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))    
-    points = blocks.ListBlock(MultiDetailBlock(),label="Add services", help_text=_("Add services"))
-    class meta:
-        icon = "doc-full"
-        label = _("Service Block")
 
-   
-    
-class DeveloperBlock(blocks.StructBlock):
-    heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
-    sub_heading = blocks.CharBlock(required=False, help_text=_("Add sub heading"))
-    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description")) 
-    image = ImageChooserBlock(required=False)
-    project = blocks.CharBlock(required=False, help_text=_("Add project count"))
-    founded_in = blocks.CharBlock(required=False, help_text=_("Add founded year"))
-    price_from = blocks.CharBlock(required=False, help_text=_("Add price starts from"))
+class PropertyListBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
-    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
+    links = blocks.ListBlock(
+        LinkBlock(),
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
+        help_text=_("Add button/link information to this section"),
+        label="Add link details"
+    )
+    
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=BLOG_TARGETS), label="Select property pages")
+    
         
     class meta:
         icon = "doc-full"
-        label = _("Developer Block")
+        label = _("Property List Block")
         
+class DeveloperListBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))  
+    links = blocks.ListBlock(
+        LinkBlock(),
+        min_num=0,  # No minimum requirement
+        max_num=2,  # Maximum of two links
+        help_text=_("Add button/link information to this section"),
+        label="Add link details"
+    )
+    
+    pages = blocks.ListBlock(blocks.PageChooserBlock(page_type=DEVELOPER_TARGETS), label="Select developer pages")
+    
+        
+    class meta:
+        icon = "doc-full"
+        label = _("Agent List Block")
+              
 class FullVideoBlock(blocks.StructBlock):
     video_source = blocks.ChoiceBlock(
         choices=[
@@ -773,7 +683,7 @@ class FullVideoBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
         
     class meta:
         icon = "media"
@@ -811,8 +721,109 @@ class FullImageBlock(blocks.StructBlock):
     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
-    component_type = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
         
     class meta:
         icon = "media"
         label = _("Full Video Block")
+        
+class MultiContentOverlayedBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
+    main_image = ImageChooserBlock(required=True)    
+    secondary_image = ImageChooserBlock(required=True) 
+    points = blocks.ListBlock(BaseContentBlock(),label="Add content", help_text="Add multiple content to this section") 
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
+    image_alignment = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="center", help_text=_("Block Alignment"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
+    
+    class Meta:
+        icon = "image"
+        label = _("Multi Content Overlayed Image Block")
+    
+class MultiContentImageBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(required=False, help_text=_("Add your heading"))
+    sub_heading = blocks.CharBlock(required=False, help_text=_("Add your sub heading"))
+    description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add additional text"))
+    image = ImageChooserBlock(required=False)
+    points = blocks.ListBlock(BaseContentBlock(),label="Add content", help_text="Add multiple content to this section") 
+    background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+    top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+    bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
+    image_alignment = blocks.ChoiceBlock(max_length=20, choices=ALIGNMENT_CHOICES,  null=True, blank=True, default="center", help_text=_("Block Alignment"))
+    component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
+
+    class meta:
+        icon = "image"
+        label = _("Multi Content Image Block")
+
+
+
+# -----------------------------------------------------------------------------------------------------------------------------
+# # project listing block
+# class ProjectBlock(blocks.StructBlock):
+#     developer = blocks.CharBlock(required=False, help_text=_("Add developer"))
+#     points = blocks.ListBlock(ProjectDetailBlock(), label="Add points", help_text="Add multiple points to this section")
+#     heading = blocks.CharBlock(required=False, help_text=_("Add project"))
+#     sub_heading = blocks.CharBlock(required=False, help_text=_("Add detail"))
+#     images = blocks.ListBlock(ImageBlock(), label="Add images", help_text="Add multiple images to this section")     
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Project Block")
+        
+# class AmenitiesListBlock(blocks.StructBlock):
+#     icon = ImageChooserBlock(required=False) 
+#     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Amenities List Block")
+    
+# class AmentiesBlock(blocks.StructBlock):
+#     heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
+#     points = blocks.ListBlock(AmenitiesListBlock(), label = "Add details", help_text="add multiple amenities here")
+    
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Amenities Block")
+    
+# class MultiDetailBlock(blocks.StructBlock):
+#     image = ImageChooserBlock(required=False) 
+#     heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
+#     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))    
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Multidata Block")
+        
+       
+# class ServiceBlock(blocks.StructBlock):
+#     heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
+#     sub_heading = blocks.CharBlock(required=False, help_text=_("Add sub heading"))
+#     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description"))    
+#     points = blocks.ListBlock(MultiDetailBlock(),label="Add services", help_text=_("Add services"))
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Service Block")
+
+   
+    
+# class DeveloperBlock(blocks.StructBlock):
+#     heading = blocks.CharBlock(required=False, help_text=_("Add heading"))
+#     sub_heading = blocks.CharBlock(required=False, help_text=_("Add sub heading"))
+#     description = blocks.RichTextBlock(editor='default',required=False, help_text=_("Add description")) 
+#     image = ImageChooserBlock(required=False)
+#     project = blocks.CharBlock(required=False, help_text=_("Add project count"))
+#     founded_in = blocks.CharBlock(required=False, help_text=_("Add founded year"))
+#     price_from = blocks.CharBlock(required=False, help_text=_("Add price starts from"))
+#     background = blocks.ChoiceBlock(max_length=50, choices=BG_CHOICES,  null=True, blank=True, default="transparent", help_text=_("Block Backgound"))
+#     top_padding = blocks.ChoiceBlock(max_length=50, choices=TOP_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Top padding"))
+#     bottom_padding = blocks.ChoiceBlock(max_length=50, choices=BOTTOM_PADDING_CHOICES,  null=True, blank=True, default="big", help_text=_("Bottom padding"))      
+#     component_type = blocks.ChoiceBlock(max_length=20, choices=COMPONENT_TYPE,  null=True, blank=True, default="all", help_text=_("Component Type"))
+        
+#     class meta:
+#         icon = "doc-full"
+#         label = _("Developer Block")
+
+# -----------------------------------------------------------------------------------------------------------------------------
